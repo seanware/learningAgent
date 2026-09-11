@@ -1,7 +1,8 @@
 import sys
 
-from dotenv import load_dotenv
+
 from openai import OpenAI
+import os
 
 from ingest import load_faq_data, build_index, course_documents
 from metrics import RAGWithMetrics
@@ -9,14 +10,15 @@ from metrics import RAGWithMetrics
 from db_save import save_conversation
 
 def create_assistant():
-    load_dotenv()
+    
+    
 
     documents = course_documents()
     index = build_index(documents)
 
-    return RAGWithMetrics(
+    return RAGWithMetrics( 
         index=index,
-        llm_client=OpenAI(),
+        llm_client=OpenAI(os.environ.get('OPENAI_API_KEY')),
     )
 
 if __name__ == "__main__":

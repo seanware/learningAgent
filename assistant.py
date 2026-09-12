@@ -7,6 +7,8 @@ import os
 from ingest import load_faq_data, build_index, course_documents
 from metrics import RAGWithMetrics
 
+import streamlit as st
+
 #from db_save import save_conversation
 
 def create_assistant():
@@ -18,7 +20,7 @@ def create_assistant():
 
     return RAGWithMetrics( 
         index=index,
-        llm_client=OpenAI(os.environ.get('OPENAI_API_KEY')),
+        llm_client=OpenAI(st.secrets["OPENAI_API_KEY"]),
     )
 
 if __name__ == "__main__":

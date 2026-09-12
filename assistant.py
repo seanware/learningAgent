@@ -13,14 +13,14 @@ import streamlit as st
 
 def create_assistant():
     
-    
+    api_key = st.secrets["OPENAI_API_KEY"]
 
     documents = course_documents()
     index = build_index(documents)
 
     return RAGWithMetrics( 
         index=index,
-        llm_client=OpenAI(st.secrets["OPENAI_API_KEY"]),
+        llm_client=OpenAI(api_key=api_key),
     )
 
 if __name__ == "__main__":

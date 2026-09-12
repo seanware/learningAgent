@@ -1,1 +1,3 @@
-
+minsearch
+openai
+streamlit
